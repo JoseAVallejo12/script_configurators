@@ -115,90 +115,27 @@ function install_sudo()
 	fi
 }
 
-# 1. Betty "C" code style install proccess.
-function install_betty()
+function install_tools()
 {
-	if [ "${CTRL_DICT["betty"]}" != "SKIPPED" ]
+	if [ "${CTRL_DICT["$1"]}" != "SKIPPED" ]
 	then
-		echo 'Install Betty "C" code style validator ? (y/n)';
-		read -r VAR1_BETTY;
-		if [ "$VAR1_BETTY" == "y" ];
+		echo "The tool $1 is not Install, do you want install $1 ? (y/n)";
+		read -r VAR_TOOL;
+		if [ "$VAR_TOOL" == "y" ]
 		then
-			install_sudo;
-			wait;
-			sudo apt-get update -y;
-			wait;
-			git clone https://github.com/holbertonschool/Betty.git;
-			wait;
-			echo '*******************************************';
-			echo 'preparing for installation proccess. wait !';
-			echo '*******************************************';
-			sleep 2;
-			cd "$PWD"/Betty
-			source ./install.sh;
-			sudo -y cp assets/scripts_config/betty /bin/;
-			cd ..
-			rm -rf "$PWD"/Betty;
-		elif [ "$VAR1_BETTY" == "n" ];
-		then
-			CTRL_DICT["betty"]="SKIPPED"
-			PROMP_DICT["betty"]="${CYAN} SKIPPED ${NC}";
-		fi
-	fi
-}
+			install_sudo
+			echo "llamando para installar $tool"
+			eval "$(cat assets/scripts_install/"$1.sh")"
+			sleep 5
 
-# 2. Zsh Oh My ZSH shell.
-function install_zsh()
-{
-	if [ "${CTRL_DICT["zsh"]}" != "SKIPPED" ];
-	then
-		echo 'Install Zsh (Oh my Zsh shell) ? (y/n)';
-		read -r VAR1_ZSH;
-		if [ "$VAR1_ZSH" == "y" ];
-		then
-			install_sudo;
-			wait;
-			sudo apt-get update -y;
-			sudo apt-get install -y zsh;
-			wait
-			git clone https://github.com/ohmyzsh/ohmyzsh.git;
-			chmod u+x "$PWD"/oh-my-zsh/tools/install.sh;
-			clear;
-			echo "**************************************";
-			echo "  Zsh Shell successfully Installed... ";
-			echo "**************************************";
-			sleep 2;
-		elif [ "$VAR1_ZSH" == "n" ];
-		then
-			CTRL_DICT["zsh"]="SKIPPED"
-			PROMP_DICT["zsh"]="${CYAN} SKIPPED ${NC}";
-		fi
-	fi
-}
 
-# 3. git installation.
-function install_git()
-{
-	if [ "${CTRL_DICT["git"]}" != "SKIPPED" ];
-	then
-		echo 'Install git ? (y/n)';
-		read -r VAR1_GIT;
-		if [ "$VAR1_GIT" == "y" ];
+		elif [ "$VAR_TOOL" == "n" ]
 		then
-			install_sudo;
-			wait;
-			sudo apt-get update -y;
-			sudo apt-get install -y git;
-			wait;
-			clear;
-			echo "**************************************";
-			echo "     git successfully Installed...    ";
-			echo "**************************************";
-			sleep 2;
-		elif [ "$VAR1_GIT" == "n" ];
-		then
-			CTRL_DICT["git"]="SKIPPED"
-			PROMP_DICT["git"]="${CYAN} SKIPPED ${NC}";
+			echo "No llamando para installar $1"
+			sleep 3;
+			CTRL_DICT["$1"]="SKIPPED"
+			PROMP_DICT["$1"]="${CYAN} SKIPPED ${NC}"
+
 		fi
 	fi
 }
@@ -248,142 +185,6 @@ function install_git_config()
 	fi
 }
 
-# 5. shellcheck installation.
-function install_shellcheck()
-{
-	if [ "${CTRL_DICT["shellcheck"]}" != "SKIPPED" ];
-	then
-		echo 'Install shellcheck script validator ? (y/n)';
-		read -r VAR1_SHELLCHECK;
-		if [ "$VAR1_SHELLCHECK" == "y" ];
-		then
-			install_sudo;
-			wait;
-			sudo apt-get update -y;
-			sudo apt-get install -y shellcheck;
-			wait;
-			clear;
-			echo "**************************************";
-			echo "         shellcheck Installing...     ";
-			echo "**************************************";
-			sleep 2;
-		elif [ "$VAR1_SHELLCHECK" == "n" ];
-		then
-			CTRL_DICT["shellcheck"]="SKIPPED"
-			PROMP_DICT["shellcheck"]="${CYAN} SKIPPED ${NC}";
-		fi
-	fi
-}
-
-# 6. valgrind installation.
-function install_valgrind()
-{
-	if [ "${CTRL_DICT["valgrind"]}" != "SKIPPED" ];
-	then
-		echo 'Install valgrind memory tester ? (y/n)';
-		read -r VAR1_VALGRIND;
-		if [ "$VAR1_VALGRIND" == "y" ];
-		then
-			install_sudo;
-			wait;
-			sudo apt-get update -y;
-			sudo apt-get install -y valgrind;
-			wait;
-			clear;
-			echo "**************************************";
-			echo "       Valgrind  Installing...        ";
-			echo "**************************************";
-			sleep 2;
-		elif [ "$VAR1_VALGRIND" == "n" ];
-		then
-			CTRL_DICT["valgrind"]="SKIPPED"
-			PROMP_DICT["valgrind"]="${CYAN} SKIPPED ${NC}";
-		fi
-	fi
-}
-
-# 7. MYSQL installation.
-function install_mysql()
-{
-	if [ "${CTRL_DICT["mysql"]}" != "SKIPPED" ];
-	then
-		echo 'Install mysql ? (y/n)';
-		read -r VAR1_MYSQL;
-		if [ "$VAR1_MYSQL" == "y" ];
-		then
-			install_sudo;
-			wait;
-			sudo apt-get update -y;
-			sudo apt-get install -y mysql-server;
-			wait;
-			clear;
-			echo "**************************************";
-			echo "          MYSQL Installing...         ";
-			echo "**************************************";
-			sleep 2;
-		elif [ "$VAR1_MYSQL" == "n" ];
-		then
-			CTRL_DICT["mysql"]="SKIPPED"
-			PROMP_DICT["mysql"]="${CYAN} SKIPPED ${NC}";
-		fi
-	fi
-}
-
-# 8. VIM installation.
-function install_vim()
-{
-	if [ "${CTRL_DICT["vim"]}" != "SKIPPED" ];
-	then
-		echo 'Install VIM [customized] ? (y/n)';
-		read -r VAR1_VIM;
-		if [ "$VAR1_VIM" == "y" ];
-		then
-			install_sudo;
-			wait;
-			sudo apt-get update -y;
-			sudo apt-get install -y vim;
-			wait;
-			git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-			wait;
-			sudo rm "$HOME/.vimrc";
-			sudo cp "assets/scripts_config/.vimrc" "$HOME/.vimrc";
-			sudo vim +PluginInstall +qall;
-			clear;
-			echo "**************************************";
-			echo "           VIM Installing...          ";
-			echo "**************************************";
-			sleep 2;
-		elif [ "$VAR1_VIM" == "n" ];
-		then
-			CTRL_DICT["vim"]="SKIPPED"
-			PROMP_DICT["vim"]="${CYAN} SKIPPED ${NC}";
-		fi
-	fi
-}
-
-# 9. EMACS installation.
-function install_emacs()
-{
-	if [ "${CTRL_DICT["emacs"]}" != "SKIPPED" ];
-	then
-		echo 'Install EMACS [customized] ? (y/n)';
-		read -r VAR1_EMACS;
-		if [ "$VAR1_EMACS" == "y" ];
-		then
-			install_sudo;
-			wait;
-			sudo apt-get update -y;
-			sudo apt-get install -y emacs;
-			wait;
-			sh "$PWD"/assets/scripts_config/emacs.sh;
-			wait;
-		elif [ "$VAR1_EMACS" == "n" ];
-		then
-			CTRL_DICT["emacs"]="SKIPPED"
-			PROMP_DICT["emacs"]="${CYAN} SKIPPED ${NC}";
-		fi
-	fi
-}
 
 # -----------------------------------------
 # main program of the script (entry point).
@@ -401,7 +202,7 @@ do
 	tool_stat="${CTRL_DICT["$tool"]}"
 	if [ "$tool_stat" == "NOT FOUND" ]
 	then
-		install_"$tool"
+		install_tools "$tool"
 	fi
 	echo "$(prog_validator; prompt)"
 done
