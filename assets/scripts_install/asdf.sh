@@ -1,7 +1,7 @@
 sudo apt-get update
 sudo apt install -y curl git
 
-# *******Install dependencias******
+# *******Install dependencias tested in ubuntu 18.04******
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0-rc1
 sudo apt-get install -y libssl-dev
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libsqlite3-dev
