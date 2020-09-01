@@ -1,2 +1,5 @@
 #!/bin/bash
-echo "this escrips is for mysql instalations"
+# isntall mysql data base
+sudo apt-get update -y
+wait
+sudo apt-get install -y mysql-server;
