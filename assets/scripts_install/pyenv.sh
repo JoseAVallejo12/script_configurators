@@ -16,14 +16,14 @@ sudo apt-get install -y libssl1.0
 if [ "$SHELL" == "zsh" ]
 then
 	echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-  echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+	echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+	echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
 fi
 
 if [ "$SHELL" == "bash" ]
 then
 	echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-  echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
+	echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+	echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
 fi
 exec "$SHELL"
