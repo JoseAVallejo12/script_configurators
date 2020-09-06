@@ -1,0 +1,12 @@
+# Find the latest version on https://github.com/creationix/nvm#install-script
+# --curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
+# Add in your ~/.zshrc the following:
+# export NVM_DIR=~/.nvm
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+ 
+# source ~/.zshrc
+
+# Usage :
+
+# nvm install node
